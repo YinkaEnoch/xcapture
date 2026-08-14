@@ -1,8 +1,8 @@
-# XSnap — X Post Screenshot Generator
+# XCapture — X Post Screenshot Generator
 
 A modern, polished, **100% frontend-only web application** that converts X (formerly Twitter) post links into crisp, high-resolution PNG screenshot images directly in your browser.
 
-![XSnap Screenshot Generator](https://raw.githubusercontent.com/yinkaenoch/xcapture/main/public/preview.png)
+![XCapture Screenshot Generator](https://raw.githubusercontent.com/yinkaenoch/xcapture/main/public/preview.png)
 
 ## Features
 
@@ -20,10 +20,10 @@ A modern, polished, **100% frontend-only web application** that converts X (form
 ### 1. Client-Side X Post Retrieval
 - Standard browser `fetch()` requests to Twitter/X endpoints fail due to **CORS (Cross-Origin Resource Sharing)** restrictions.
 - Standard cross-origin `<iframe>` embeds (such as Twitter's `widgets.js`) render tweets on screen, but browsers enforce the **Same-Origin Policy**, which taints the HTML5 Canvas and prevents `html2canvas` or `html-to-image` from capturing pixel data inside cross-origin iframes.
-- **Solution**: XSnap utilizes X's official **JSONP oEmbed API** (`https://publish.twitter.com/oembed?url=...&callback=...`). Script tags are exempt from CORS, allowing the browser to retrieve official post metadata, text, and author handles safely without any server proxy.
+- **Solution**: XCapture utilizes X's official **JSONP oEmbed API** (`https://publish.twitter.com/oembed?url=...&callback=...`). Script tags are exempt from CORS, allowing the browser to retrieve official post metadata, text, and author handles safely without any server proxy.
 
 ### 2. High-Fidelity DOM Rendering & Canvas Capture
-- Once post metadata is received, XSnap renders a pixel-perfect, fully styled DOM component (`<TweetCard />`).
+- Once post metadata is received, XCapture renders a pixel-perfect, fully styled DOM component (`<TweetCard />`).
 - Screenshot rasterization is executed using [`html-to-image`](https://github.com/bubkoo/html-to-image), which serializes the DOM nodes and stylesheets into an SVG data URI and draws it onto an HTML5 Canvas at high pixel density (`pixelRatio: 2`).
 - The user can download the generated image directly as a PNG (e.g. `x-post-jack-20.png`).
 
@@ -77,7 +77,7 @@ The output files will be generated in the `dist/` directory, ready for deploymen
 
 ## Deployment
 
-Because XSnap requires zero backend server, it can be deployed to any static host:
+Because XCapture requires zero backend server, it can be deployed to any static host:
 
 - **Vercel**: Import repository and deploy with default Vite preset.
 - **Netlify**: Drag & drop the `dist/` directory or connect repository.

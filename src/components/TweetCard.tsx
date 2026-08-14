@@ -184,10 +184,10 @@ export const TweetCard = forwardRef<HTMLDivElement, TweetCardProps>(
             </>
           )}
 
-          {/* Optional XSnap Watermark */}
+          {/* Optional XCapture Watermark */}
           {showWatermark && (
             <div className={`text-[10px] ${currentTheme.subtext} opacity-60 text-right font-mono tracking-wider pt-1 flex items-center justify-end gap-1`}>
-              <span>Generated with XSnap</span>
+              <span>Generated with XCapture</span>
             </div>
           )}
         </div>

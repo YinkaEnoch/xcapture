@@ -20,7 +20,7 @@ export const Header: React.FC<HeaderProps> = ({ darkMode, onToggleDarkMode }) =>
           <div>
             <div className="flex items-center gap-2">
               <span className="font-extrabold text-lg text-white tracking-tight font-sans">
-                XSnap
+                XCapture
               </span>
               <span className="inline-flex items-center gap-1 text-[10px] font-semibold tracking-wider px-2 py-0.5 rounded-full bg-sky-500/10 text-sky-400 border border-sky-500/20 uppercase">
                 <Sparkles className="w-2.5 h-2.5" /> Client-Side
