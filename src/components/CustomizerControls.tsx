@@ -216,11 +216,16 @@ export const CustomizerControls: React.FC<CustomizerControlsProps> = ({
           <div>
             <label className="block text-slate-400 font-medium mb-1">Tweet Text</label>
             <textarea
-              rows={3}
+              rows={4}
               value={editText}
               onChange={(e) => setEditText(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-100 text-xs focus:border-sky-500 focus:outline-none"
+              className="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2 text-slate-100 text-xs focus:border-sky-500 focus:outline-none font-sans"
             />
+            {editText.includes('...') && (
+              <p className="text-[11px] text-sky-400/90 mt-1 flex items-center gap-1">
+                <span>💡 Note: X's public API truncates long-form posts. You can paste or complete the full text above!</span>
+              </p>
+            )}
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
