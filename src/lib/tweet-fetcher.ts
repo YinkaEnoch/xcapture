@@ -69,10 +69,24 @@ export function parseOEmbedHtml(oembed: OEmbedResponse, statusId: string, userna
   const parser = new DOMParser();
   const doc = parser.parseFromString(oembed.html, 'text/html');
   
-  // Extract text paragraph inside blockquote
+  // Extract text paragraph inside blockquote and preserve newlines from <br> tags
   const pTag = doc.querySelector('p');
-  let tweetText = pTag ? pTag.textContent || '' : '';
-  tweetText = tweetText.replace(/\n+/g, '\n').trim();
+  let tweetText = '';
+  if (pTag) {
+    const clone = pTag.cloneNode(true) as HTMLElement;
+    clone.querySelectorAll('br').forEach((br) => {
+      br.replaceWith('\n');
+    });
+    tweetText = clone.textContent || '';
+  }
+
+  // Decode HTML entities (e.g. &#39; -> ', &quot; -> ", &amp; -> &)
+  const txtElement = document.createElement('textarea');
+  txtElement.innerHTML = tweetText;
+  tweetText = txtElement.value;
+
+  // Clean up whitespace: normalize carriage returns and limit consecutive newlines
+  tweetText = tweetText.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
 
   // Extract author handle from author_url or HTML text
   let extractedHandle = username;

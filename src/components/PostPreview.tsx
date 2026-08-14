@@ -68,12 +68,14 @@ export const PostPreview: React.FC<PostPreviewProps> = ({
       </div>
 
       {/* Main Preview Container */}
-      <div className="relative p-6 sm:p-10 rounded-3xl bg-slate-950/60 border border-slate-800/80 shadow-2xl flex flex-col items-center justify-center min-h-[320px] overflow-hidden">
-        {viewMode === 'card' ? (
-          <TweetCard ref={cardRef} tweet={tweet} customization={customization} />
-        ) : (
-          <OfficialTweetWidget tweet={tweet} />
-        )}
+      <div className="relative p-4 sm:p-8 rounded-3xl bg-slate-950/60 border border-slate-800/80 shadow-2xl flex flex-col items-center justify-center min-h-[320px] overflow-visible w-full">
+        <div className="w-full max-w-xl mx-auto flex justify-center overflow-visible">
+          {viewMode === 'card' ? (
+            <TweetCard ref={cardRef} tweet={tweet} customization={customization} />
+          ) : (
+            <OfficialTweetWidget tweet={tweet} />
+          )}
+        </div>
       </div>
 
       {/* Interactive Customization Controls (only for custom high-res card mode) */}

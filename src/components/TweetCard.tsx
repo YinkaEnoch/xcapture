@@ -58,13 +58,13 @@ export const TweetCard = forwardRef<HTMLDivElement, TweetCardProps>(
 
     // Container background style mappings
     const backgroundStyles = {
-      none: 'bg-transparent p-0 shadow-none',
-      'gradient-blue': 'bg-gradient-to-br from-sky-500 via-blue-600 to-indigo-700 p-6 sm:p-10 rounded-3xl shadow-2xl',
-      'gradient-purple': 'bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 p-6 sm:p-10 rounded-3xl shadow-2xl',
-      'gradient-amber': 'bg-gradient-to-br from-amber-500 via-orange-600 to-red-600 p-6 sm:p-10 rounded-3xl shadow-2xl',
-      'gradient-emerald': 'bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 p-6 sm:p-10 rounded-3xl shadow-2xl',
-      'gradient-sunset': 'bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 p-6 sm:p-10 rounded-3xl shadow-2xl',
-      mesh: 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-6 sm:p-10 rounded-3xl shadow-2xl border border-slate-700/50',
+      none: 'bg-transparent p-2 sm:p-4 shadow-none',
+      'gradient-blue': 'bg-gradient-to-br from-sky-500 via-blue-600 to-indigo-700 p-5 sm:p-8 rounded-3xl shadow-2xl',
+      'gradient-purple': 'bg-gradient-to-br from-purple-600 via-pink-600 to-rose-600 p-5 sm:p-8 rounded-3xl shadow-2xl',
+      'gradient-amber': 'bg-gradient-to-br from-amber-500 via-orange-600 to-red-600 p-5 sm:p-8 rounded-3xl shadow-2xl',
+      'gradient-emerald': 'bg-gradient-to-br from-emerald-500 via-teal-600 to-cyan-600 p-5 sm:p-8 rounded-3xl shadow-2xl',
+      'gradient-sunset': 'bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-800 p-5 sm:p-8 rounded-3xl shadow-2xl',
+      mesh: 'bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-5 sm:p-8 rounded-3xl shadow-2xl border border-slate-700/50',
     };
 
     // Padding mappings inside card
@@ -85,11 +85,13 @@ export const TweetCard = forwardRef<HTMLDivElement, TweetCardProps>(
       <div
         ref={ref}
         id="tweet-capture-target"
-        className={`w-full max-w-xl mx-auto transition-all ${backgroundStyles[customBackground]}`}
+        className="w-full max-w-xl box-border overflow-visible transition-all bg-transparent"
+        style={{ margin: 0 }}
       >
-        <div
-          className={`w-full rounded-2xl border ${currentTheme.bg} ${currentTheme.text} ${currentTheme.border} ${paddingStyles[cardPadding]} shadow-xl flex flex-col gap-4 font-sans select-none relative overflow-hidden`}
-        >
+        <div className={`w-full transition-all ${backgroundStyles[customBackground]}`}>
+          <div
+            className={`w-full rounded-2xl border ${currentTheme.bg} ${currentTheme.text} ${currentTheme.border} ${paddingStyles[cardPadding]} shadow-xl flex flex-col gap-4 font-sans select-none relative overflow-visible`}
+          >
           {/* Header row: Avatar, Name, Handle, Logo */}
           <div className="flex items-start justify-between gap-3">
             <div className="flex items-center gap-3 min-w-0">
@@ -190,7 +192,8 @@ export const TweetCard = forwardRef<HTMLDivElement, TweetCardProps>(
           )}
         </div>
       </div>
-    );
+    </div>
+  );
   }
 );
 

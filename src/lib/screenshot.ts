@@ -22,13 +22,55 @@ export async function downloadElementAsPng(
   } = options;
 
   try {
-    // Wait briefly for images/fonts to settle
-    await new Promise((resolve) => setTimeout(resolve, 150));
+    // 1. Wait for web fonts to load
+    if ('fonts' in document) {
+      await document.fonts.ready;
+    }
 
-    // Convert DOM element to PNG data URL
+    // 2. Preload all internal images (avatars, attachments)
+    const images = Array.from(element.querySelectorAll('img'));
+    await Promise.all(
+      images.map(
+        (img) =>
+          new Promise<void>((resolve) => {
+            if (img.complete) {
+              resolve();
+            } else {
+              img.onload = () => resolve();
+              img.onerror = () => resolve();
+            }
+          })
+      )
+    );
+
+    // Wait briefly for layout and styling to settle
+    await new Promise((resolve) => setTimeout(resolve, 200));
+
+    // 3. Compute precise bounding dimensions including scroll/box sizing
+    const rect = element.getBoundingClientRect();
+    const width = Math.ceil(Math.max(rect.width, element.offsetWidth, element.scrollWidth));
+    const height = Math.ceil(Math.max(rect.height, element.offsetHeight, element.scrollHeight));
+
+    // 4. Convert DOM element to PNG data URL with explicit dimensions and resets
     const dataUrl = await toPng(element, {
       cacheBust: true,
       pixelRatio,
+      width,
+      height,
+      canvasWidth: width * pixelRatio,
+      canvasHeight: height * pixelRatio,
+      style: {
+        transform: 'none',
+        margin: '0',
+        maxWidth: 'none',
+        maxHeight: 'none',
+        width: `${width}px`,
+        height: `${height}px`,
+        boxSizing: 'border-box',
+        position: 'relative',
+        left: '0',
+        top: '0',
+      },
       filter: (node) => {
         // Exclude elements marked with data-no-screenshot attribute
         if (node instanceof HTMLElement && node.dataset.noScreenshot === 'true') {
