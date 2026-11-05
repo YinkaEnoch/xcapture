@@ -2,8 +2,6 @@
 
 A modern, polished, **100% frontend-only web application** that converts X (formerly Twitter) post links into crisp, high-resolution PNG screenshot images directly in your browser.
 
-![XCapture Screenshot Generator](https://raw.githubusercontent.com/yinkaenoch/xcapture/main/public/preview.png)
-
 ## Features
 
 - ⚡ **100% Client-Side**: Operates entirely in the browser without any backend server, proxy, API key, or database.
